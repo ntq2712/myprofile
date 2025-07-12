@@ -1,0 +1,24 @@
+{
+  "Add License Comment": {
+    "prefix": "license", 
+    "body": [
+      "/********************************************************",
+      " * Copyright ${CURRENT_YEAR} Nguyen Trong Qui.",
+      " * All rights reserved.",
+      " *********************************************************/"
+    ],
+    "description": "Add a license comment to the top of the file"
+  },
+  "Create Function": {
+    "prefix": "func",
+    "body": [
+      "/**",
+      "* @description ${1:Function_Description}",
+      "* @author qui.nguyen ${CURRENT_YEAR}-${CURRENT_MONTH}-${CURRENT_DATE}",
+      "* @param {${2: params}}",
+      "* @returns ${3: Return_Value}",
+      "*/"
+    ],
+    "description": "Create a function"
+  }
+}

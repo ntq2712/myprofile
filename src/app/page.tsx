@@ -1,101 +1,88 @@
-import Image from "next/image";
+"use client";
+
+import Header from "@/components/common/Header";
+import CaseStudies from "@/modules/profile/CaseStudies";
+import GetInTouch from "@/modules/profile/GetInTouch";
+import Introduction from "@/modules/profile/Introduction";
+import ProfileFoorter from "@/modules/profile/ProfileFoorter";
+import Testimonials from "@/modules/profile/Testimonials";
+import WorkExperiences from "@/modules/profile/WorkExperiences";
+import { useEffect, useRef, useState } from "react";
+
+type SectionKey = "home" | "caseStudies" | "testimonials" | "work" | "contact";
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="https://nextjs.org/icons/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+  const homeRef = useRef<HTMLDivElement>(null);
+  const caseStudiesRef = useRef<HTMLDivElement>(null);
+  const testimonialsRef = useRef<HTMLDivElement>(null);
+  const workRef = useRef<HTMLDivElement>(null);
+  const contactRef = useRef<HTMLDivElement>(null);
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="https://nextjs.org/icons/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+  const [activeSection, setActiveSection] = useState<SectionKey>("home");
+
+  const sectionRefs: Record<SectionKey, React.RefObject<HTMLDivElement>> = {
+    home: homeRef,
+    caseStudies: caseStudiesRef,
+    testimonials: testimonialsRef,
+    work: workRef,
+    contact: contactRef,
+  };
+
+  const scrollTo = (section: SectionKey) => {
+    setActiveSection(section)
+    sectionRefs[section].current?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries.find((entry) => entry.isIntersecting);
+        if (visible?.target.id) {
+          setActiveSection(visible.target.id as SectionKey);
+        }
+      },
+      {
+        rootMargin: "-30% 0px -60% 0px",
+        threshold: 0.1,
+      }
+    );
+
+    Object.entries(sectionRefs).forEach(([key, ref]) => {
+      if (ref.current) {
+        ref.current.id = key;
+        observer.observe(ref.current);
+      }
+    });
+
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <main className="flex flex-col items-center justify-center">
+      <Header active={activeSection} onNavigate={scrollTo} />
+
+      <div ref={homeRef} className="w-full flex items-center justify-center">
+        <Introduction />
+      </div>
+      <div
+        ref={caseStudiesRef}
+        className="w-full flex items-center justify-center"
+      >
+        <CaseStudies />
+      </div>
+      <div
+        ref={testimonialsRef}
+        className="w-full flex items-center justify-center"
+      >
+        <Testimonials />
+      </div>
+      <div ref={workRef} className="w-full flex items-center justify-center">
+        <WorkExperiences />
+      </div>
+      <div ref={contactRef} className="w-full flex items-center justify-center">
+        <GetInTouch />
+      </div>
+      <ProfileFoorter />
+    </main>
   );
 }
