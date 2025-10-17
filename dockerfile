@@ -10,7 +10,7 @@ COPY . .
 
 RUN yarn build 
 
-FROM node:25-apline as runner
+FROM node:25-alpine as runner
 
 WORKDIR /app
 
