@@ -3,11 +3,11 @@
  * All rights reserved.
  *********************************************************/
 "use client";
-import AuthLayout from "@/layouts/AuthLayout";
-import React, { ReactNode } from "react";
+import MainMenuLayout from "@/layouts/MainMenuLayout";
+import { ReactNode } from "react";
 
 function layout({ children }: Readonly<{ children: ReactNode }>) {
-  return <AuthLayout>{children}</AuthLayout>;
+  return <MainMenuLayout>{children}</MainMenuLayout>;
 }
 
 export default layout;

@@ -3,13 +3,13 @@
  * All rights reserved.
  *********************************************************/
 
-import ApiServece from "../config";
+import ApiService from "../config";
 
 export async function uploadImage(file: File) {
   const formData = new FormData();
   formData.append("file", file);
 
-  const response = await ApiServece.instance.uploadFile<ApiResponse<string>>("api/Upload/UploadImage",formData)
+  const response = await ApiService.instance.uploadFile<ApiResponse<string>>("api/Upload/UploadImage",formData)
   
   return response
 }

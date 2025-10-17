@@ -8,7 +8,7 @@ import Image, { ImageProps } from 'next/image';
 
 type OptimizedImageProps = ImageProps & {
   alt: string;
-  priority?: boolean; // true nếu ảnh cần preload
+  priority?: boolean; 
   sizes?: string;
 };
 
@@ -29,7 +29,7 @@ export default function OptimizedImage({
       height={height}
       priority={priority}
       sizes={sizes}
-      placeholder="blur" // cần dùng ảnh tĩnh hoặc import ảnh để có blur
+      placeholder="blur"
       {...rest}
     />
   );

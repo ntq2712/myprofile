@@ -8,6 +8,7 @@
 "use client";
 
 import { uploadImage } from "@/api/file";
+import Image from "next/image";
 import {
   forwardRef,
   useImperativeHandle,
@@ -74,9 +75,12 @@ const ImageUploader = forwardRef<ImageUploaderRef, ImageUploaderProps>(
     return (
       <div className="flex flex-col items-center gap-4">
         {preview ? (
-          <img
+          <Image
             src={preview}
             alt="preview"
+            width={160}
+            height={160}
+            unoptimized
             className="w-40 h-40 object-cover rounded-lg shadow-md border border-gray-300"
           />
         ) : (

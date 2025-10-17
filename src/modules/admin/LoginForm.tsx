@@ -2,16 +2,17 @@
  * Copyright 2025 Nguyen Trong Qui.
  * All rights reserved.
  *********************************************************/
-'use client';
+"use client";
 
+import { signIn } from "@/api/auth";
+import ApiService from "@/api/config";
 import useAppForm from "@/react-form/formContext";
 import { loginOpt } from "@/react-form/formOpts/login";
 import { useRouter } from "next/navigation";
-import React from "react";
 import z from "zod";
 
 const loginSchema = z.object({
-  account: z.string().min(5, "Required minimum 5 characters"),
+  userName: z.string().min(5, "Required minimum 5 characters"),
   password: z.string().min(5, "Required minimum 5 characters"),
 });
 
@@ -23,8 +24,18 @@ function LoginForm() {
     validators: {
       onSubmit: loginSchema,
     },
-    onSubmit: ({  }) => {
-      router.replace("/admin/dashboard");
+    onSubmit: ({ value }) => {
+      signIn(value).then(async (res) => {
+        if (res.status === 200) {
+          router.replace("/admin/dashboard");
+
+          if (res.status === 200) {
+            ApiService.instance.setToken(res.data);
+
+            localStorage.setItem('accessToken', res.data)
+          }
+        }
+      });
     },
   });
 
@@ -42,24 +53,34 @@ function LoginForm() {
         }}
       >
         <div className="flex flex-col gap-1 w-full">
-          <hookForm.AppField name="account">
-            {(field) => <field.TextField label="Account" inputType="text" />}
+          <hookForm.AppField name="userName">
+            {(field) => (
+              <field.TextField
+                label="Account"
+                inputType="text"
+                placeholder="Enter account"
+              />
+            )}
           </hookForm.AppField>
         </div>
         <div className="flex flex-col gap-1 w-full">
           <hookForm.AppField name="password">
             {(field) => (
-              <field.TextField label="Password" inputType="password" />
+              <field.TextField
+                label="Password"
+                inputType="password"
+                placeholder="Enter password"
+              />
             )}
           </hookForm.AppField>
         </div>
+        <button
+          type="submit"
+          className="h-12 flex items-center justify-center w-full text-md font-semibold text-light font-ibm bg-[#3F8E00] hover:bg-[#4a9d2c] rounded-lg active:bg-[#223612]"
+        >
+          Login
+        </button>
       </form>
-      <button
-        onClick={hookForm.handleSubmit}
-        className="h-12 flex items-center justify-center w-full text-md font-semibold text-light font-ibm bg-[#3F8E00] hover:bg-[#4a9d2c] rounded-lg active:bg-[#223612]"
-      >
-        Login
-      </button>
     </div>
   );
 }

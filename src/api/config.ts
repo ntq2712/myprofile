@@ -3,16 +3,18 @@
  * All rights reserved.
  *********************************************************/
 
-class ApiServece {
-  static _instance: ApiServece;
-  private baseUrl = "http://localhost:5297";
+// quinguyen.click
+// localhost:5297
+class ApiService {
+  static _instance: ApiService;
+  private baseUrl = "http://quinguyen.click";
   private token = "";
 
   constructor() {}
 
   static get instance() {
     if (!this._instance) {
-      this._instance = new ApiServece();
+      this._instance = new ApiService();
     }
 
     return this._instance;
@@ -22,25 +24,77 @@ class ApiServece {
     this.token = value;
   }
 
-  async get<T>(endpoint: string, options?: RequestInit): Promise<T> {
+  private async callApi<T>(
+    endpoint: string,
+    method: "POST" | "GET" | "PUT" | "DELETE",
+    options?: RequestInit,
+    body?: unknown
+  ): Promise<T> {
     try {
       const res = await fetch(`${this.baseUrl}/${endpoint}`, {
-        method: "GET",
+        method: method,
+        ...(body ? { body: JSON.stringify(body) } : {}),
         headers: {
           "Content-Type": "application/json",
-          Authorization: this.token,
+          ...(this.token ? { Authorization: `Bearer ${this.token}` } : {}),
           ...(options?.headers || {}),
         },
         ...options,
       });
 
       if (!res.ok) {
-        const errorText = res.text();
+        // const errorText = res.text();
 
-        throw new Error(`GET ${endpoint} failed: ${res.status} - ${errorText}`);
+        // if (res.status === 401) {
+        //   if (typeof window !== "undefined") {
+        //     window.location.href = "/";
+        //   }
+        // }
+
+        // throw new Error(`GET ${endpoint} failed: ${res.status} - ${errorText}`);
       }
 
       return res.json();
+    } catch (err) {
+      console.error("GET error:", err);
+      throw err;
+    }
+  }
+
+  async get<T>(endpoint: string, params?: object, options?: RequestInit): Promise<T> {
+    try {
+
+      let _endpoint = endpoint
+      const _params = params ? Object.entries(params) : undefined
+
+      if(params){ 
+        let paramsValue = ''
+        _params?.map(([key, value]) => {
+          paramsValue =paramsValue ? `${paramsValue}&${key}=${value}` : `${key}=${value}`
+        })
+
+        _endpoint = `${_endpoint}?${paramsValue}`
+      }
+
+      const res = await this.callApi<T>(_endpoint, "GET", options);
+
+      return res;
+    } catch (err) {
+      console.error("GET error:", err);
+      throw err;
+    }
+  }
+
+  async delete<T>(endpoint: string, options?: RequestInit): Promise<T> {
+    try {
+      try {
+        const res = await this.callApi<T>(endpoint, "DELETE", options);
+
+        return res;
+      } catch (err) {
+        console.error("GET error:", err);
+        throw err;
+      }
     } catch (err) {
       console.error("GET error:", err);
       throw err;
@@ -53,28 +107,11 @@ class ApiServece {
     options?: RequestInit
   ): Promise<T> {
     try {
-      const res = await fetch(`${this.baseUrl}/${endpoint}`, {
-        method: "POST",
-        body: JSON.stringify(body),
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: this.token,
-          ...(options?.headers || {}),
-        },
-        ...options,
-      });
+      const res = await this.callApi<T>(endpoint, "POST", options, body);
 
-      if (!res.ok) {
-        const errorText = res.text();
-
-        throw new Error(
-          `POST ${endpoint} failed: ${res.status} - ${errorText}`
-        );
-      }
-
-      return res.json();
+      return res;
     } catch (err) {
-      console.error("POST error:", err);
+      console.error("GET error:", err);
       throw err;
     }
   }
@@ -108,29 +145,14 @@ class ApiServece {
     options?: RequestInit
   ): Promise<T> {
     try {
-      const res = await fetch(`${this.baseUrl}/${endpoint}`, {
-        method: "PUT",
-        body: JSON.stringify(body),
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: this.token,
-          ...(options?.headers || {}),
-        },
-        ...options,
-      });
+      const res = await this.callApi<T>(endpoint, "PUT", options, body);
 
-      if (!res.ok) {
-        const errorText = res.text();
-
-        throw new Error(`PUT ${endpoint} failed: ${res.status} - ${errorText}`);
-      }
-
-      return res.json();
+      return res;
     } catch (err) {
-      console.error("PUT error:", err);
+      console.error("GET error:", err);
       throw err;
     }
   }
 }
 
-export default ApiServece;
+export default ApiService;

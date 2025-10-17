@@ -24,8 +24,6 @@ function UpdateProfile() {
     ...profileOpt,
     validators: {},
     onSubmit: async ({ value }) => {
-      console.log("IProfile: ", value);
-
       const url = await uploaderRef.current?.upload();
 
       updateProfileMutaition.mutateAsync({...value, avatar: url});
@@ -80,7 +78,7 @@ function UpdateProfile() {
             </form.AppField>
 
             <form.AppField name="birthDay">
-              {(field) => <field.TextField label="Birtday" inputType="text" />}
+              {(field) => <field.TextField label="Birtday" inputType="date" />}
             </form.AppField>
 
             <form.AppField name="introduction">

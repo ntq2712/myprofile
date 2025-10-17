@@ -3,12 +3,15 @@
  * All rights reserved.
  *********************************************************/
 
+import AddWork from '@/modules/admin/work-experience/AddWork'
+import WorkExperienceList from '@/modules/admin/work-experience/WorkExperienceList'
 import React from 'react'
 
 function page() {
   return (
     <div>
-      <div>WorkExperiences</div>
+      <AddWork/>
+      <WorkExperienceList/>
     </div>
   )
 }

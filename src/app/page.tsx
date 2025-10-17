@@ -8,6 +8,7 @@ import ProfileFoorter from "@/modules/profile/ProfileFoorter";
 import Testimonials from "@/modules/profile/Testimonials";
 import WorkExperiences from "@/modules/profile/WorkExperiences";
 import { useEffect, useRef, useState } from "react";
+import 'react-quill/dist/quill.snow.css';
 
 type SectionKey = "home" | "caseStudies" | "testimonials" | "work" | "contact";
 

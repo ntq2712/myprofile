@@ -6,12 +6,11 @@
 import { formOptions } from "@tanstack/react-form";
 
 interface ILogin {
-  account: string;
-  password: string;
+  userName: string; password: string
 }
 
 const defaultValues: ILogin = {
-  account: "",
+  userName: "",
   password: "",
 };
 

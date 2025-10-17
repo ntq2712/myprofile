@@ -4,14 +4,14 @@
  *********************************************************/
 
 import apiUrl from "../apiUrl";
-import ApiServece from "../config";
+import ApiService from "../config";
 
 export const getProfile = () => {
-  return ApiServece.instance.get<ApiResponse<Information>>(apiUrl.profile.get);
+  return ApiService.instance.get<ApiResponse<Information>>(apiUrl.profile.get);
 };
 
 export const updateProfile = (body: Record<string, unknown>) => {
-  return ApiServece.instance.put<ApiResponse<Information>>(
+  return ApiService.instance.put<ApiResponse<Information>>(
     apiUrl.profile.update,
     body
   );

@@ -8,6 +8,7 @@ import PrimaryButon from "../../components/common/atomic/button/PrimaryButon";
 import Link from "next/link";
 import { getProfile } from "@/api/profile";
 import { useState } from "react";
+import Image from "next/image";
 
 function Introduction() {
   const [info, setInfor] = useState<Information | null>(null);
@@ -38,16 +39,24 @@ function Introduction() {
             <PrimaryButon>Let’s get started</PrimaryButon>
           </div>
           <div className="col-span-4 flex items-center justify-center">
-            <img
-              className="rounded-full
-                          sm:w-[200px] sm:h-[200px]
-                          md:w-[300px] md:h-[300px]
-                          lg:w-[350px] lg:h-[350px]
-                          xl:w-[400px] xl:h-[400px]
-                          2xl:w-[480px] 2xl:h-[480px]"
-              alt="Nguyễn Trọng Quí"
-              src={info?.avatar}
-            />
+            {info?.avatar && (
+              <div
+                className="relative rounded-full overflow-hidden
+    sm:w-[200px] sm:h-[200px]
+    md:w-[300px] md:h-[300px]
+    lg:w-[350px] lg:h-[350px]
+    xl:w-[400px] xl:h-[400px]
+    2xl:w-[480px] 2xl:h-[480px]"
+              >
+                <Image
+                  src={info?.avatar ?? ""} // fallback nếu null
+                  alt="Nguyễn Trọng Quí"
+                  fill
+                  className="object-cover"
+                  unoptimized
+                />
+              </div>
+            )}
           </div>
         </div>
         <div className="row-span-2 flex flex-col gap-5">
