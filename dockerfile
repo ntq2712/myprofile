@@ -22,4 +22,4 @@ COPY --from=base /app ./
 
 EXPOSE 4201
 
-CMD [ "yarn start" ] 
+CMD ["yarn", "start"]
