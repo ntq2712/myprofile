@@ -5,8 +5,9 @@
 
 import { formOptions } from "@tanstack/react-form";
 
-interface ILogin {
-  userName: string; password: string
+export interface ILogin {
+  userName: string;
+  password: string;
 }
 
 const defaultValues: ILogin = {

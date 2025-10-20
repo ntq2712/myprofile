@@ -9,8 +9,10 @@ import Link from "next/link";
 import { getProfile } from "@/api/profile";
 import { useState } from "react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 function Introduction() {
+  const router = useRouter()
   const [info, setInfor] = useState<Information | null>(null);
 
   useEffect(() => {
@@ -36,7 +38,7 @@ function Introduction() {
             <div className="text-[14px] text-primary font-ibm">
               {info?.introduction ?? ""}
             </div>
-            <PrimaryButon>Let’s get started</PrimaryButon>
+            <PrimaryButon onClick={() => router.push('/share-your-thuoghts')}>Share your thoughts</PrimaryButon>
           </div>
           <div className="col-span-4 flex items-center justify-center">
             {info?.avatar && (
@@ -49,8 +51,8 @@ function Introduction() {
     2xl:w-[480px] 2xl:h-[480px]"
               >
                 <Image
-                  src={info?.avatar ?? ""} // fallback nếu null
-                  alt="Nguyễn Trọng Quí"
+                  src={info?.avatar ?? ""}
+                  alt="Nguyen Trong Qui"
                   fill
                   className="object-cover"
                   unoptimized

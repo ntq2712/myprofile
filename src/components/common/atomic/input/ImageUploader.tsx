@@ -15,6 +15,7 @@ import {
   useState,
   ChangeEvent,
   useEffect,
+  useRef,
 } from "react";
 
 export type ImageUploaderRef = {
@@ -29,6 +30,7 @@ const ImageUploader = forwardRef<ImageUploaderRef, ImageUploaderProps>(
   ({ imageUrl }, ref) => {
     const [file, setFile] = useState<File | undefined>(undefined);
     const [preview, setPreview] = useState<string | null>(null);
+    const inputRef = useRef<HTMLInputElement>(null);
 
     useEffect(() => {
       if (imageUrl) {
@@ -72,28 +74,39 @@ const ImageUploader = forwardRef<ImageUploaderRef, ImageUploaderProps>(
       }
     };
 
+    const handleClickBox = () => {
+      inputRef.current?.click();
+    };
+
     return (
       <div className="flex flex-col items-center gap-4">
-        {preview ? (
-          <Image
-            src={preview}
-            alt="preview"
-            width={160}
-            height={160}
-            unoptimized
-            className="w-40 h-40 object-cover rounded-lg shadow-md border border-gray-300"
-          />
-        ) : (
-          <div className="w-40 h-40 flex items-center justify-center border border-dashed border-gray-400 rounded-lg text-gray-400">
-            No image
-          </div>
-        )}
+        <div
+          className="relative w-40 h-40 cursor-pointer group"
+          onClick={handleClickBox}
+        >
+          {preview ? (
+            <Image
+              src={preview}
+              alt="preview"
+              width={160}
+              height={160}
+              unoptimized
+              className="w-full h-full object-cover rounded-lg shadow-md border border-gray-300 group-hover:opacity-90"
+            />
+          ) : (
+            <div className="w-full h-full flex items-center justify-center border border-dashed border-gray-400 rounded-lg text-gray-400 hover:bg-gray-50 hover:text-gray-500 transition">
+              No image
+            </div>
+          )}
+        </div>
 
+        {/* input ẩn */}
         <input
+          ref={inputRef}
           type="file"
           accept="image/*"
           onChange={handleImageChange}
-          className="file:bg-green-600 file:text-white file:px-4 file:py-2 file:rounded file:border-0 file:cursor-pointer text-sm"
+          className="hidden"
         />
       </div>
     );

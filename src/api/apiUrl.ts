@@ -40,6 +40,8 @@ const apiUrl = {
     verifyEmail: setPath(root, "User/verify-email"),
     signIn: setPath(root, "User/Login"),
     signUp: "User/Register",
+    signInVisitor: setPath(root, "Visitor/LoginVisitor"),
+    registerVisitor: setPath(root, "Visitor/RegiteVisitor")
   },
   testimonial: {
     getAll: setPath(root, "Testimonials/GetAll"),

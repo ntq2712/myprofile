@@ -13,3 +13,12 @@ type User = {
   modifyBy: string;
   modifyAt: string;
 };
+
+type Visitor = {
+  id: string
+  fullName: string
+  companyName: string
+  positionTitle: string
+  avatar: string
+  email: string
+};

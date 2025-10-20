@@ -24,8 +24,6 @@ function AddCaseStudyType() {
   const form = useAppForm({
     ...caseStudyTypeOpt,
     onSubmit: async ({ value }) => {
-      console.log("values AddCaseStudy: ", value);
-
       createCaseStudyMutaition.mutateAsync(value);
     },
   });
@@ -33,6 +31,8 @@ function AddCaseStudyType() {
   const createCaseStudyMutaition = useMutation({
     mutationFn: (body: unknown) => CreateCaseStudyType(body),
     onSuccess: () => {
+     
+
       form.reset();
       queryClient.invalidateQueries({
         queryKey: [apiUrl.caseStudy.getType],
