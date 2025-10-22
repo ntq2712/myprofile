@@ -2,7 +2,6 @@
  * Copyright 2025 Nguyen Trong Qui.
  * All rights reserved.
  *********************************************************/
-import type { Metadata } from "next";
 import { IBM_Plex_Mono } from "next/font/google";
 import localFont from "next/font/local";
 import "./globals.css";
@@ -26,29 +25,35 @@ const geistMono = localFont({
   weight: "100 900",
 });
 
-export const metadata: Metadata = {
-  title: "Nguyen Trong Qui - Lập trình viên Mobile & Web",
+export const metadata = {
+  title: "Nguyen Trong Qui | Profile",
   description:
-    "Trang cá nhân của Nguyễn Trọng Quí - Lập trình viên React Native, Swift, .NET",
-  keywords: [
-    "Nguyen Trong Qui",
-    "Nguyễn Trọng Quí",
-    "Qui Trọng",
-    "TrongQui",
-    "Trọng Quí",
-    "Qui Nguyen",
-    "QuiNguyen",
-    "Quí Nguyễn",
-    "Lập trình viên Việt Nam",
-  ],
+    "Trang cá nhân của Nguyễn Trọng Quí — Lập trình viên React Native, Swift, .NET",
   openGraph: {
-    title: "Nguyen Trong Qui",
+    title: "Nguyen Trong Qui | Profile",
     description:
-      "Trang cá nhân của Nguyễn Trọng Quí - Lập trình viên React Native, Swift, .NET",
-    url: "https://quinguyen.cloud",
+      "Trang cá nhân của Nguyen Trong Qui — nơi chia sẻ dự án và kinh nghiệm lập trình.",
+    url: "http://quinguyen.cloud",
     siteName: "Nguyen Trong Qui",
+    images: [
+      {
+        url: "http://quinguyen.click/uploads/b166c489-19a8-4947-accd-9f1cf40f5136.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Nguyen Trong Qui",
+      },
+    ],
     locale: "vi_VN",
-    type: "profile",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Nguyen Trong Qui | Profile",
+    description:
+      "Trang cá nhân của Nguyen Trong Qui — nơi chia sẻ dự án và kinh nghiệm lập trình.",
+    images: [
+      "http://quinguyen.click/uploads/b166c489-19a8-4947-accd-9f1cf40f5136.jpg",
+    ],
   },
 };
 
@@ -59,28 +64,6 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={ibmPlexMono.variable}>
-      <head>
-        <title>Nguyen Trong Qui | Profile</title>
-        <meta property="og:title" content="Nguyen Trong Qui | Profile" />
-        <meta
-          property="og:description"
-          content="Trang cá nhân của Nguyen Trong Qui — nơi chia sẻ dự án và kinh nghiệm lập trình."
-        />
-        <meta property="og:image" content="http://quinguyen.click/uploads/b166c489-19a8-4947-accd-9f1cf40f5136.jpg" />
-        <meta property="og:url" content="http://quinguyen.cloud" />
-        <meta property="og:type" content="website" />
-
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Nguyen Trong Qui | Profile" />
-        <meta
-          name="twitter:description"
-          content="Trang cá nhân của Nguyen Trong Qui — nơi chia sẻ dự án và kinh nghiệm lập trình."
-        />
-        <meta
-          name="twitter:image"
-          content="http://quinguyen.click/uploads/b166c489-19a8-4947-accd-9f1cf40f5136.jpg"
-        />
-      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
