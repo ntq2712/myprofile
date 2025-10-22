@@ -5,6 +5,7 @@
 import { IBM_Plex_Mono } from "next/font/google";
 import localFont from "next/font/local";
 import "./globals.css";
+import "react-quill/dist/quill.snow.css";
 import Providers from "./providers";
 
 const ibmPlexMono = IBM_Plex_Mono({
@@ -25,38 +26,6 @@ const geistMono = localFont({
   weight: "100 900",
 });
 
-export const metadata = {
-  title: "Nguyen Trong Qui | Profile",
-  description:
-    "Trang cá nhân của Nguyễn Trọng Quí — Lập trình viên React Native, Swift, .NET",
-  openGraph: {
-    title: "Nguyen Trong Qui | Profile",
-    description:
-      "Trang cá nhân của Nguyen Trong Qui — nơi chia sẻ dự án và kinh nghiệm lập trình.",
-    url: "http://quinguyen.cloud",
-    siteName: "Nguyen Trong Qui",
-    images: [
-      {
-        url: "http://quinguyen.click/uploads/b166c489-19a8-4947-accd-9f1cf40f5136.jpg",
-        width: 1200,
-        height: 630,
-        alt: "Nguyen Trong Qui",
-      },
-    ],
-    locale: "vi_VN",
-    type: "website",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Nguyen Trong Qui | Profile",
-    description:
-      "Trang cá nhân của Nguyen Trong Qui — nơi chia sẻ dự án và kinh nghiệm lập trình.",
-    images: [
-      "http://quinguyen.click/uploads/b166c489-19a8-4947-accd-9f1cf40f5136.jpg",
-    ],
-  },
-};
-
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -64,6 +33,40 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={ibmPlexMono.variable}>
+      <head>
+        <title>Nguyen Trong Qui | Profile</title>
+        <meta
+          name="description"
+          content="Trang cá nhân của Nguyen Trong Qui — nơi chia sẻ dự án và kinh nghiệm lập trình."
+        />
+
+        {/* Open Graph */}
+        <meta property="og:title" content="Nguyen Trong Qui | Profile" />
+        <meta
+          property="og:description"
+          content="Trang cá nhân của Nguyen Trong Qui — nơi chia sẻ dự án và kinh nghiệm lập trình."
+        />
+        <meta property="og:url" content="http://quinguyen.cloud" />
+        <meta
+          property="og:image"
+          content="http://quinguyen.click/uploads/b166c489-19a8-4947-accd-9f1cf40f5136.jpg"
+        />
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="Nguyen Trong Qui" />
+        <meta property="fb:app_id" content="1234567890" />
+
+        {/* Twitter */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Nguyen Trong Qui | Profile" />
+        <meta
+          name="twitter:description"
+          content="Trang cá nhân của Nguyen Trong Qui — nơi chia sẻ dự án và kinh nghiệm lập trình."
+        />
+        <meta
+          name="twitter:image"
+          content="http://quinguyen.click/uploads/b166c489-19a8-4947-accd-9f1cf40f5136.jpg"
+        />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
