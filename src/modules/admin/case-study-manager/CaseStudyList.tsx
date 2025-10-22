@@ -10,6 +10,7 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 import Link from "next/link";
 import React from "react";
 import { FaTrash } from "react-icons/fa";
+import AddCaseStudy from "./AddCaseStudy";
 
 function CaseStudyList() {
   const { data, isLoading, refetch } = useQuery({
@@ -50,6 +51,7 @@ function CaseStudyList() {
                   {e.caseStudyType.name}
                 </td>
                 <td>
+                  <AddCaseStudy value={e} type='edit'/>
                   <button
                     onClick={(event) => {
                       event.preventDefault();

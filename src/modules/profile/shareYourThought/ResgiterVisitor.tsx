@@ -3,6 +3,8 @@
  * All rights reserved.
  *********************************************************/
 
+"use client";
+
 import { regiterVisitor } from "@/api/auth";
 import { deleteImage } from "@/api/file";
 import PrimaryButon from "@/components/common/atomic/button/PrimaryButon";
@@ -132,7 +134,7 @@ function ResgiterVisitor({ backToLogin }: { backToLogin: () => void }) {
               <hookForm.AppField name="email">
                 {(field) => (
                   <field.TextField
-                    label="Your Email"
+                    label="Your Email (to response)"
                     placeholder="Your Email"
                     inputType="text"
                   />

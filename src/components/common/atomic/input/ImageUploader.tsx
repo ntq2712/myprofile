@@ -4,9 +4,6 @@
  *********************************************************/
 
 "use client";
-
-"use client";
-
 import { uploadImage } from "@/api/file";
 import Image from "next/image";
 import {
@@ -35,6 +32,8 @@ const ImageUploader = forwardRef<ImageUploaderRef, ImageUploaderProps>(
     useEffect(() => {
       if (imageUrl) {
         setPreview(imageUrl);
+      }else{
+        setPreview(null)
       }
     }, [imageUrl]);
 
@@ -100,7 +99,6 @@ const ImageUploader = forwardRef<ImageUploaderRef, ImageUploaderProps>(
           )}
         </div>
 
-        {/* input ẩn */}
         <input
           ref={inputRef}
           type="file"

@@ -39,12 +39,12 @@ function Testimonials() {
                 <div className="text-primary text-xs font-ibm">{e.content}</div>
                 <div className="flex flex-row gap-3 items-center mt-auto">
                   <Image
-                    src={e.profilePic ?? ""} // fallback nếu null
+                    src={e.profilePic ?? ""} 
                     alt="Nguyễn Trọng Quí"
                     width={48}
                     height={48}
                     className="rounded-full object-cover w-[48px] h-[48px]"
-                    unoptimized // nếu ảnh là URL từ API hoặc base64
+                    unoptimized 
                   />
                   <div className="flex flex-col gap-1">
                     <div className="font-ibm text-sm font-semibold">

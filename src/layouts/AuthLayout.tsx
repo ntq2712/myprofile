@@ -12,21 +12,21 @@ function AuthLayout({ children }: Readonly<{ children: ReactNode }>) {
   const [ready, setReady] = useState(false);
 
   useEffect(() => {
-    const token = localStorage.getItem("accessToken");
+    if (typeof window !== "undefined") {
+      const token = localStorage.getItem("accessToken");
 
-    if (!token) {
-      if (typeof window !== "undefined") {
+      if (!token) {
         window.location.href = "/";
-      }
-    } else {
-      ApiService.instance.setToken(token);
+      } else {
+        ApiService.instance.setToken(token);
 
-      setReady(true)
+        setReady(true);
+      }
     }
   }, []);
 
   if (!ready) {
-    return <LoadingScreen visible/>;
+    return <LoadingScreen visible />;
   }
 
   return (

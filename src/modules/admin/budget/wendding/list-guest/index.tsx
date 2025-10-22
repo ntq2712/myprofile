@@ -5,6 +5,7 @@
 "use client";
 import { deleteGuest, getListGuest, getSummaryGuest } from "@/api/guest";
 import { useMutation, useQuery } from "@tanstack/react-query";
+import { Popover } from "antd";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
 import { CiSearch } from "react-icons/ci";
@@ -16,11 +17,9 @@ import {
 } from "react-icons/fa6";
 import { HiMiniReceiptRefund, HiUserGroup } from "react-icons/hi2";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
-import { IoTrash } from "react-icons/io5";
 import { RiMoneyDollarBoxFill } from "react-icons/ri";
 import AddOrEditGuest from "./AddOrEditGuest";
 import GuestFilter from "./components/GuestFilter";
-import { Popover } from "antd";
 
 function ListGeust() {
   const searchParams = useSearchParams();
@@ -32,7 +31,10 @@ function ListGeust() {
   useEffect(() => {
     const query = Object.fromEntries(searchParams.entries());
 
-    const status = query.status && query.status !== 'undefined' ? Number(query.status) : undefined;
+    const status =
+      query.status && query.status !== "undefined"
+        ? Number(query.status)
+        : undefined;
 
     setStatus(status);
   }, [searchParams]);
@@ -245,13 +247,16 @@ function ListGeust() {
                   <td className="border border-gray-400 px-4 py-2 min-w-48 items-center justify-center">
                     <div className="flex flex-cpl gap-4 items-center justify-center">
                       <AddOrEditGuest type="edit" values={guest} />
-                      <button
-                        onClick={() =>
+                      {/* <Popconfirm
+                        title="Do you want to delete item?"
+                        onConfirm={() =>
                           deleteGuestMutaition.mutateAsync(guest.id)
                         }
                       >
-                        <IoTrash className="text-red-500 text-xl" />
-                      </button>
+                        <button>
+                          <IoTrash className="text-red-500 text-xl" />
+                        </button>
+                      </Popconfirm> */}
                     </div>
                   </td>
                 </tr>
@@ -265,9 +270,24 @@ function ListGeust() {
             arrow={false}
             content={
               <div className="flex flex-col gap-2 w-20">
-                <button className="border-b-[1px] border-b-black-300" onClick={() => setPageSize(5)}>5</button>
-                <button className="border-b-[1px] border-b-black-300" onClick={() => setPageSize(10)}>10</button>
-                <button className="border-b-[1px] border-b-black-300" onClick={() => setPageSize(15)}>15</button>
+                <button
+                  className="border-b-[1px] border-b-black-300"
+                  onClick={() => setPageSize(5)}
+                >
+                  5
+                </button>
+                <button
+                  className="border-b-[1px] border-b-black-300"
+                  onClick={() => setPageSize(10)}
+                >
+                  10
+                </button>
+                <button
+                  className="border-b-[1px] border-b-black-300"
+                  onClick={() => setPageSize(15)}
+                >
+                  15
+                </button>
                 <button onClick={() => setPageSize(20)}>20</button>
               </div>
             }

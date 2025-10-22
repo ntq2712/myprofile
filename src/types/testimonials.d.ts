@@ -10,4 +10,5 @@ type Testimonial = {
   companyName: string;
   fullName: string;
   profilePic: string;
+  status: number
 };

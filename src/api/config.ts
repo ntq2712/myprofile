@@ -5,6 +5,7 @@
 
 // quinguyen.click
 // localhost:5297
+"use client";
 class ApiService {
   static _instance: ApiService;
   private baseUrl = "http://quinguyen.click";

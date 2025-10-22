@@ -2,7 +2,7 @@
  * Copyright 2025 Nguyen Trong Qui.
  * All rights reserved.
  *********************************************************/
-
+"use client";
 import useAppForm from "@/react-form/formContext";
 import { getInTouchOpt } from "@/react-form/formOpts/getInTouch";
 import React from "react";

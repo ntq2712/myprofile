@@ -2,7 +2,7 @@
  * Copyright 2025 Nguyen Trong Qui.
  * All rights reserved.
  *********************************************************/
-
+"use client";
 import LoginForm from "@/modules/admin/LoginForm";
 
 function page() {

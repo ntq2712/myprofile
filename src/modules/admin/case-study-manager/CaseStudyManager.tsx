@@ -3,24 +3,17 @@
  * All rights reserved.
  *********************************************************/
 "use client";
-import PrimaryButon from "@/components/common/atomic/button/PrimaryButon";
-import { useState } from "react";
 import AddCaseStudy from "./AddCaseStudy";
-import CaseStudyTypeList from "./CaseStudyTypeList";
-import CaseStudyList from "./CaseStudyList";
 import AddCaseStudyType from "./AddCaseStudyType";
+import CaseStudyList from "./CaseStudyList";
+import CaseStudyTypeList from "./CaseStudyTypeList";
 
 function CaseStudyManager() {
-  const [openModal, setOpenModal] = useState(false);
-
-  const openAddCaseStudy = () => {
-    setOpenModal(true);
-  };
 
   return (
     <div className="w-full h-full">
       <div className="h-14 w-full flex flex-row gap-4">
-        <PrimaryButon onClick={openAddCaseStudy}>Add Case Study</PrimaryButon>
+        <AddCaseStudy />
         <AddCaseStudyType />
       </div>
 
@@ -32,11 +25,6 @@ function CaseStudyManager() {
           <CaseStudyList />
         </div>
       </div>
-
-      <AddCaseStudy
-        openModal={openModal}
-        setOpenModal={() => setOpenModal(false)}
-      />
     </div>
   );
 }

@@ -41,11 +41,13 @@ const apiUrl = {
     signIn: setPath(root, "User/Login"),
     signUp: "User/Register",
     signInVisitor: setPath(root, "Visitor/LoginVisitor"),
-    registerVisitor: setPath(root, "Visitor/RegiteVisitor")
+    registerVisitor: setPath(root, "Visitor/RegiteVisitor"),
   },
   testimonial: {
     getAll: setPath(root, "Testimonials/GetAll"),
+    getAllByFilter: setPath(root, "Testimonials/GetAllByFilter"),
     create: setPath(root, "Testimonials/Create"),
+    updateStatus: setPath(root, "Testimonials/UpdateTestimonialStatus"),
   },
   user: {
     getAll: setPath(root, "User/GetAllUser"),
@@ -55,8 +57,8 @@ const apiUrl = {
     getSummaryGuest: setPath(root, "Guest/get-summary-guest"),
     add: setPath(root, "Guest/create-guest"),
     edit: setPath(root, "Guest/update-guest"),
-    delete: (id: string) => setPath(root, `Guest/delete-guest?id=${id}`)
-  }
+    delete: (id: string) => setPath(root, `Guest/delete-guest?id=${id}`),
+  },
 };
 
 export default apiUrl;
